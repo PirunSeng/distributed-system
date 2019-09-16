@@ -32,9 +32,9 @@ public class MasterServer {
 
           dictionary = rd.wordFrequency(sentences);
 
-          for(Map.Entry<String, Integer> word : dictionary.entrySet()) {
-            System.out.println(word.getKey() + ":" + word.getValue());
-          }
+          // for(Map.Entry<String, Integer> word : dictionary.entrySet()) {
+          //   System.out.println(word.getKey() + ":" + word.getValue());
+          // }
           out.println(dictionary);
         }
 
