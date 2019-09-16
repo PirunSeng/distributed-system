@@ -6,21 +6,15 @@ import java.rmi.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DateServer extends UnicastRemoteObject
-	implements RemoteDate{
+public class SlaveServer extends UnicastRemoteObject implements RemoteRMI {
 
-	//private static final long serialVersionUID = 1L;
-
-	/**
-   *
-   */
   private static final long serialVersionUID = 1L;
 
-  public DateServer() throws RemoteException {
+  public SlaveServer() throws RemoteException {
 		super();
 	}
-	
-	public Map<String, Integer> wordFrequency(String str){
+
+	public Map<String, Integer> wordFrequency(String str) {
 		try{
 			System.out.println("A client is called!!! from ::" + getClientHost());
 			System.out.println("Local addr : " + InetAddress.getLocalHost());
@@ -31,7 +25,7 @@ public class DateServer extends UnicastRemoteObject
       for (String word : str.split(" ", 0)) {
         word = word.trim().toLowerCase();
         if(!word.isEmpty()) {
-          // check if word already have in dictionary			
+          // check if word already have in dictionary
           if(dictionary.containsKey(word)) {
             dictionary.put(word, dictionary.get(word) + 1);
           } else {
@@ -39,21 +33,21 @@ public class DateServer extends UnicastRemoteObject
           }
         }
       }
+
 			return dictionary;
-		}catch(Exception e){
+		} catch(Exception e) {
 			System.out.println(e);
 		}
 		return null;
 	}
-	
-	public static void main(String args[]){
-		try{
+
+	public static void main(String args[]) {
+		try {
 			LocateRegistry.createRegistry(1099);
-			DateServer ds = new DateServer();
-			Naming.rebind("DateServer", ds);
-			//registry.rebind("DateServer", ds);
-			System.out.println("DateServer is created!!!");
-		}catch(Exception e){
+			SlaveServer ds = new SlaveServer();
+			Naming.rebind("SlaveServer", ds);
+			System.out.println("SlaveServer is created!!!");
+		} catch(Exception e) {
 			System.out.println(e);
 		}
 	}
