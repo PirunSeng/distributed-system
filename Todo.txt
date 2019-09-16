@@ -1,0 +1,25 @@
+TODO:
+
+WAY 1: Single Server
+- Perform word counting on the same pc. No new client, no master server, no slave server. Everything in client-server (1 client, 1 server as sample app we have built.)
+
+Way 2: Distributed Servers
+- Extend current client to be master server.
+- Create a new client
+- Create slave servers
+
+- Client:
+	- Read file
+	- Send file to master server, log start time
+	- Receive respond from server, and log time, and file size, number of servers.
+- Master Server:
+	- Receive file from new client
+	- Perform logic to split tasks to new slave/RMI servers.
+	- Split file to string by number of slave server. E.g 3 strings for 3 servers.
+	- Receive response word frequency from slave servers
+	- Merge response to be a new response for sending back to client.
+- Slave server:
+	- Receive request/string from master server
+	- Count word
+	- Send count word to master server back
+
