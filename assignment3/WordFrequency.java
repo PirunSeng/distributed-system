@@ -3,6 +3,7 @@ import java.util.Map;
 import java.util.HashMap;
 
 public class WordFrequency implements Serializable {
+  private static final long serialVersionUID = 1190476516911661470L;
   private Map<String, Integer> dictionary;
 
   public WordFrequency() {
