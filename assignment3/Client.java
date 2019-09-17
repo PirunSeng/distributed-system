@@ -42,6 +42,6 @@ public class Client {
   }
 
   public static void main(String[] args) {
-    Client fc = new Client("localhost", 8888, "my_file.txt");
+    Client fc = new Client("localhost", 8888, args[0]);
   }
 }

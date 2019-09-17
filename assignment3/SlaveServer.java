@@ -3,8 +3,6 @@ import java.rmi.Naming;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.server.*;
 import java.rmi.*;
-import java.util.HashMap;
-import java.util.Map;
 
 public class SlaveServer extends UnicastRemoteObject implements RemoteRMI {
 
@@ -14,23 +12,18 @@ public class SlaveServer extends UnicastRemoteObject implements RemoteRMI {
 		super();
 	}
 
-	public Map<String, Integer> wordFrequency(String str) {
+	public WordFrequency wordFrequency(String []arrStr, int start, int end) {
 		try{
 			System.out.println("A client is called!!! from ::" + getClientHost());
 			System.out.println("Local addr : " + InetAddress.getLocalHost());
-		  Map<String, Integer> dictionary = new HashMap<String, Integer>();
-      // String line = "Hello World. It has two world.";
-      str = str.replaceAll("[^\\p{Alpha}]+", " ");
-      // loop on all words
-      for (String word : str.split(" ", 0)) {
+		  WordFrequency dictionary = new WordFrequency();
+      String word = "";
+      for(int i = start; i < end; i++) {
+        word = arrStr[i];
+        word = word.replaceAll("[^\\p{Alpha}]+", " ");
         word = word.trim().toLowerCase();
-        if(!word.isEmpty()) {
-          // check if word already have in dictionary
-          if(dictionary.containsKey(word)) {
-            dictionary.put(word, dictionary.get(word) + 1);
-          } else {
-            dictionary.put(word, 1);
-          }
+        if(word != "null" && !word.isEmpty()) {
+          dictionary.addWord(word);
         }
       }
 

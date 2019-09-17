@@ -1,8 +1,6 @@
 import java.io.*;
 import java.net.*;
 import java.rmi.Naming;
-import java.util.HashMap;
-import java.util.Map;
 
 public class MasterServer {
   public static void main(String[] args) {
@@ -15,7 +13,7 @@ public class MasterServer {
       RemoteRMI rd = (RemoteRMI) Naming.lookup("rmi://localhost/SlaveServer");
 
       // dictionary
-      Map<String, Integer> dictionary = new HashMap<String, Integer>();
+      WordFrequency dictionary = new WordFrequency();
 
       try{
         server = new ServerSocket(8888);
@@ -29,13 +27,16 @@ public class MasterServer {
           out = new PrintWriter(socket.getOutputStream(), true);
 
           sentences = in.readLine();
+          //break sentences by number of PC
+          // add each into thread
+          // join thead
+          // response result
+          String []arrayWords = sentences.split(" ", 0);
+          int len =  arrayWords.length;
+          dictionary = rd.wordFrequency(arrayWords, 0, len/2);
+          dictionary.mergeWord(rd.wordFrequency(arrayWords, len/2, len));
 
-          dictionary = rd.wordFrequency(sentences);
-
-          // for(Map.Entry<String, Integer> word : dictionary.entrySet()) {
-          //   System.out.println(word.getKey() + ":" + word.getValue());
-          // }
-          out.println(dictionary);
+          out.println(dictionary.getDictionary());
         }
 
 
