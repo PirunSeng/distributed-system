@@ -9,17 +9,17 @@ Way 2: Distributed Servers
 - Create slave servers
 
 - Client:
-	- Read file
-	- Send file to master server, log start time
-	- Receive respond from server, and log time, and file size, number of servers.
+	- Read file(done)
+	- Send file to master server, log start time(done)
+	- Receive respond from server, and log time, and file size, number of servers.(done: 90%, need to save log to file)
 - Master Server:
-	- Receive file from new client
-	- Perform logic to split tasks to new slave/RMI servers.
-	- Split file to string by number of slave server. E.g 3 strings for 3 servers.
-	- Receive response word frequency from slave servers
-	- Merge response to be a new response for sending back to client.
+	- Receive file from new client(done)
+	- Perform logic to split tasks to new slave/RMI servers.(done)
+	- Split file to string by number of slave server. E.g 3 strings for 3 servers.(done: 80, issuse with split logic)
+	- Receive response word frequency from slave servers.(done)
+	- Merge response to be a new response for sending back to client.(done: 90, race condition when use thread)
 - Slave server:
-	- Receive request/string from master server
-	- Count word
-	- Send count word to master server back
+	- Receive request/string from master server.(done)
+	- Count word.(done)
+	- Send count word to master server back.(done)
 
