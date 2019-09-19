@@ -6,22 +6,22 @@ public class Client {
   private PrintWriter out;
   private BufferedReader in;
 
-  public Client(String host, int port) {
+  public Client(String host, int port, String file) {
     try {
       socket = new Socket(host, port);
       out = new PrintWriter(socket.getOutputStream(), true);
       in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-      String [] files = {
-        "data/500kb.txt",
-        "data/1000kb.txt",
-        "data/1500kb.txt",
-        "data/2000kb.txt",
-        "data/2500kb.txt",
-        "data/3000kb.txt",
-      };
-      for(String file : files) {
-        sendFile(file);
-      }
+      // String [] files = {
+      //   "data/500kb.txt",
+      //   "data/1000kb.txt",
+      //   "data/1500kb.txt",
+      //   "data/2000kb.txt",
+      //   "data/2500kb.txt",
+      //   "data/3000kb.txt",
+      // };
+      // for(String file : files) {
+      // }
+      sendFile(file);
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -53,6 +53,6 @@ public class Client {
   }
 
   public static void main(String[] args) {
-    Client fc = new Client("localhost", 8888);
+    Client fc = new Client("localhost", 8888, args[0]);
   }
 }
