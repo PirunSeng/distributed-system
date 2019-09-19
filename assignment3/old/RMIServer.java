@@ -8,9 +8,9 @@ public class RMIServer {
   public static void main(String args[]) {
     try {
       LocateRegistry.createRegistry(1099);
-      CentralizedServer center = new CentralizedServer();
-      Naming.rebind("CentralizedServer", center);
-      System.out.println("CentralizedServer is created!!!");
+      // CentralizedServer center = new CentralizedServer();
+      // Naming.rebind("CentralizedServer", center);
+      // System.out.println("CentralizedServer is created!!!");
 
 
       SlaveServer ds = new SlaveServer();
