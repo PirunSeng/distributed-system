@@ -33,9 +33,9 @@ public class WordCountingHandler extends Thread{
       } catch(InterruptedException ie){}
 
       WordFrequency dictionary = new WordFrequency();
-
+      dictionary.mergeData(wc.dictionary);
       // get result
-      out.println(dictionary);
+      out.println(dictionary.getData());
     } catch(Exception e) {
       System.out.println(e);
     }

@@ -18,10 +18,10 @@ public class WordFrequency implements Serializable {
     }
   }
 
-  public void mergeWord(WordFrequency other) {
+  public void mergeData(WordFrequency other) {
     String key = "";
     Integer value;
-    for(Map.Entry<String, Integer> word : other.getDictionary().entrySet()) {
+    for(Map.Entry<String, Integer> word : other.getData().entrySet()) {
       key = word.getKey();
       value = this.dictionary.get(key);
       value = value == null ? 0 : value;
@@ -29,7 +29,7 @@ public class WordFrequency implements Serializable {
     }
   }
 
-  public Map<String, Integer> getDictionary() {
+  public Map<String, Integer> getData() {
     return this.dictionary;
   }
 }
