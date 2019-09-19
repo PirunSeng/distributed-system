@@ -14,6 +14,7 @@ public class MasterServer {
       // Multiple PC
       RemoteRMI []rds = {
         (RemoteRMI) Naming.lookup("rmi://192.168.0.101/SlaveServer"),
+        (RemoteRMI) Naming.lookup("rmi://192.168.0.106/SlaveServer"),
         (RemoteRMI) Naming.lookup("rmi://192.168.0.107/SlaveServer")
       };
 

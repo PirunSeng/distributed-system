@@ -25,15 +25,30 @@ public class WordCountingHandler extends Thread{
       String []arrayWords = sentences.split(" ", 0);
       int len =  arrayWords.length;
 
-      WordCounting wc = new WordCounting(this.rds[0], arrayWords, 0, len);
-      wc.start();
+      // WordCounting wc = new WordCounting(this.rds[0], arrayWords,  0, len);
+      // try {
+      //   wc.join();
+      // }
+      // WordFrequency dictionary = new WordFrequency();
+      // dictionary.mergeData(wc.dictionary);
+      // out.println(dictionary.getData());
+
+      WordCounting wc1 = new WordCounting(this.rds[0], arrayWords,  0, len * (1 / 3));
+      WordCounting wc2 = new WordCounting(this.rds[1], arrayWords,  len * (1 / 3), len * (2 / 3));
+      WordCounting wc3 = new WordCounting(this.rds[2], arrayWords,  len * (2 / 3), len);
 
       try {
-        wc.join();
+        wc1.join();
+        wc2.join();
+        wc3.join();
       } catch(InterruptedException ie){}
 
       WordFrequency dictionary = new WordFrequency();
-      dictionary.mergeData(wc.dictionary);
+      dictionary.mergeData(wc1.dictionary);
+      dictionary.mergeData(wc2.dictionary);
+      dictionary.mergeData(wc3.dictionary);
+      // for(int i = 0; i < pc_count; i ++) {
+      // }
       // get result
       out.println(dictionary.getData());
     } catch(Exception e) {
@@ -54,6 +69,7 @@ class WordCounting extends Thread {
     this.arrayWords = arrayWords;
     this.start = start;
     this.end = end;
+    this.dictionary = new WordFrequency();
   }
 
   public void run() {

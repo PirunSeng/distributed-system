@@ -6,12 +6,22 @@ public class Client {
   private PrintWriter out;
   private BufferedReader in;
 
-  public Client(String host, int port, String file) {
+  public Client(String host, int port) {
     try {
       socket = new Socket(host, port);
       out = new PrintWriter(socket.getOutputStream(), true);
       in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-      sendFile(file);
+      String [] files = {
+        "data/500kb.txt",
+        "data/1000kb.txt",
+        "data/1500kb.txt",
+        "data/2000kb.txt",
+        "data/2500kb.txt",
+        "data/3000kb.txt",
+      };
+      for(String file : files) {
+        sendFile(file);
+      }
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -33,15 +43,16 @@ public class Client {
     long startTime = System.currentTimeMillis();
     out.println(sentences);
 
-    System.out.println(in.readLine());
+    in.readLine();
+    // System.out.println(in.readLine());
     long endTime = System.currentTimeMillis();
 
 
     System.out.println("-----------------------------");
-    System.out.println("Total respond time:" + (endTime - startTime));
+    System.out.println(fileName + " : " + (endTime - startTime));
   }
 
   public static void main(String[] args) {
-    Client fc = new Client("localhost", 8888, args[0]);
+    Client fc = new Client("localhost", 8888);
   }
 }
