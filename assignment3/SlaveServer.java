@@ -7,12 +7,18 @@ import java.rmi.*;
 public class SlaveServer extends UnicastRemoteObject implements RemoteRMI {
 
   private static final long serialVersionUID = 1L;
+  private CentralizedRMI centerRD;
 
   public SlaveServer() throws RemoteException {
 		super();
+    try {
+      this.centerRD =  (CentralizedRMI)Naming.lookup("rmi://192.168.0.101/CentralizedServer");
+     } catch(Exception e) {
+      System.out.println(e);
+    }
 	}
 
-	public WordFrequency wordFrequency(String []arrStr, int start, int end) {
+	public void CountWordFrequency(String []arrStr, int start, int end) {
 		try{
 			System.out.println("A client is called!!! from ::" + getClientHost());
 			System.out.println("Local addr : " + InetAddress.getLocalHost());
@@ -27,19 +33,15 @@ public class SlaveServer extends UnicastRemoteObject implements RemoteRMI {
         }
       }
 
-			return dictionary;
-		} catch(Exception e) {
-			System.out.println(e);
-		}
-		return null;
-	}
-
-	public static void main(String args[]) {
-		try {
-			LocateRegistry.createRegistry(1099);
-			SlaveServer ds = new SlaveServer();
-			Naming.rebind("SlaveServer", ds);
-			System.out.println("SlaveServer is created!!!");
+      while(true) {
+        // check turn if my turn?
+        // canShareUpdateData
+        if(this.centerRD.CanUpdateData(this.serialVersionUID)) {
+          // UpdateShareData
+          this.centerRD.MergeDictionary(dictionary);
+          break;
+        }
+      }
 		} catch(Exception e) {
 			System.out.println(e);
 		}

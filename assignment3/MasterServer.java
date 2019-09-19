@@ -6,7 +6,7 @@ public class MasterServer {
   public static void main(String[] args) {
     ServerSocket server = null;
     try {
-      // Single PC
+      // // Single PC
       RemoteRMI []rds = {
         (RemoteRMI) Naming.lookup("rmi://192.168.0.101/SlaveServer"),
       };
@@ -14,7 +14,7 @@ public class MasterServer {
       // Multiple PC
       // RemoteRMI []rds = {
       //   (RemoteRMI) Naming.lookup("rmi://192.168.0.101/SlaveServer"),
-      //   (RemoteRMI) Naming.lookup("rmi://192.168.0.108/SlaveServer")
+      //   (RemoteRMI) Naming.lookup("rmi://192.168.0.106/SlaveServer")
       // };
 
       try{

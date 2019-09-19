@@ -1,9 +1,9 @@
 ### Build
-- javac SlaveServer.java
+- javac RMIServer.java
 - javac MasterServer.java
 - javac Client.java
 
 ### Run
-- java SlaveServer
+- java RMIServer
 - java MasterServer
 - java Client data/my_text.txt
