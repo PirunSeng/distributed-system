@@ -39,7 +39,7 @@ public class SlaveServer extends UnicastRemoteObject implements RemoteRMI {
     try {
       LocateRegistry.createRegistry(1099);
       SlaveServer ds = new SlaveServer();
-      Naming.rebind("SlaveServer", ds);
+      Naming.rebind("rmi://0.0.0.0/SlaveServer", ds);
       System.out.println("SlaveServer is created!!!");
     } catch(Exception e) {
       System.out.println(e);

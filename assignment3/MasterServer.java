@@ -7,16 +7,16 @@ public class MasterServer {
     ServerSocket server = null;
     try {
       // // Single PC
+      // RemoteRMI []rds = {
+      //   (RemoteRMI) Naming.lookup("rmi://10.0.1.72/SlaveServer"),
+      // };
+
+      // Multiple PC
       RemoteRMI []rds = {
         (RemoteRMI) Naming.lookup("rmi://10.0.1.72/SlaveServer"),
+        (RemoteRMI) Naming.lookup("rmi://10.0.1.21/SlaveServer"),
+        (RemoteRMI) Naming.lookup("rmi://10.0.1.102/SlaveServer"),
       };
-
-      // // Multiple PC
-      // RemoteRMI []rds = {
-      //   (RemoteRMI) Naming.lookup("rmi://192.168.0.101/SlaveServer"),
-      //   (RemoteRMI) Naming.lookup("rmi://192.168.0.106/SlaveServer"),
-      //   (RemoteRMI) Naming.lookup("rmi://192.168.0.107/SlaveServer")
-      // };
 
       try{
         server = new ServerSocket(8888);
