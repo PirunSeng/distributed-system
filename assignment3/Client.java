@@ -21,6 +21,9 @@ public class Client {
       // };
       // for(String file : files) {
       // }
+      // for(int i = 0;i< 5; i++) {
+      //   System.out.println(i);
+      // }
       sendFile(file);
     } catch (Exception e) {
       e.printStackTrace();
